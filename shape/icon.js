@@ -47,7 +47,6 @@ export default class icon {
 		this.size			= size;
 		this.rotation		= rotation;	
 		
-		// size * canvas.factor
 		// #==== Functions ====#
 	}
 

@@ -45,26 +45,21 @@ function handleResize() {
 // Ereignislistener für das "resize"-Ereignis hinzufügen
 window.addEventListener('resize', handleResize);
 
-createArray(20, 40, 40); 
+createArray(0, 60, 60); 
 drawArray();
 
 function createArray (tiltAngle, rowSpace, colSpace) {
-    let columeSpace;
+    let columeSpace = ((colSpace + 10) / 2) * canvas.factor;
+    let rowSpaceing = rowSpace * canvas.factor;
 
-    if (colSpace === null) {
-        columeSpace = rowSpace / 2;
-    } else {
-        columeSpace = colSpace / 2;
-    }
-
-    const rows = Math.floor(((window.innerHeight / 100) * 125) / rowSpace);
+    const rows = Math.floor(((window.innerHeight / 100) * 125) / rowSpaceing);
     const columns = Math.floor(((window.innerWidth / 100) * 125) / columeSpace);
 
     for (let row = -100; row <= rows; row++) {
         for (let col = -100; col <= columns; col++) {
             const angle = tiltAngle * (Math.PI / 180);
             const x = col * columeSpace + (row * columeSpace);
-            const y = row * rowSpace;
+            const y = row * rowSpaceing;
 
             const polygonX = x + Math.cos(angle) * columeSpace * col;
             const polygonY = y + Math.sin(angle) * columeSpace * col;
@@ -74,7 +69,7 @@ function createArray (tiltAngle, rowSpace, colSpace) {
                 y: polygonY
             })
 
-            const cluster = 0.01; // Zum Beispiel 20% Chance, dass kein Fill stattfindet        
+            const cluster = 0.019; // Zum Beispiel 20% Chance, dass kein Fill stattfindet        
 
             if (Math.random() < cluster) {
                 clustermid.push({
@@ -91,11 +86,11 @@ function createArray (tiltAngle, rowSpace, colSpace) {
 
 function drawArray () {
     // Prozentuale Chance, dass Polygone nicht eingefärbt werden
-    const noFillChanceCol = 0.2; // Zum Beispiel 20% Chance, dass kein Fill stattfindet
+    const noFillChanceCol = 0.33; // Zum Beispiel 20% Chance, dass kein Fill stattfindet
     const noFillChanceGra = 0.66; // Zum Beispiel 20% Chance, dass kein Fill stattfindet
     const clusterSize = 200; // px 
-    const fadeSize = 250;
-    const fadeoffset = 100;
+    const fadeSize = 300;
+    const fadeoffset = 0;
 
     while(clustermid.length > 0) {
         let cluster = clustermid.shift();
@@ -123,7 +118,7 @@ function drawArray () {
                         let fillColor = `rgba(78, 78, 78, ${alpha})`; // Blau mit variabler Transparenz
                         let symbolIcon = new icon(randomSymbol, 0, `hsla(0, 0.00%, 23.10%, ${alpha})`, 20);
                         
-                        new polygon(controller, symbolIcon, 6, item.x, item.y, 15, fillColor, 30);
+                        new polygon(controller, symbolIcon, 6, item.x, item.y, 30, fillColor, 29);
                     }                     
                 } 
         
@@ -132,7 +127,7 @@ function drawArray () {
                         let fillColor = monokaiColors[Math.floor(Math.random() * monokaiColors.length)];
                         let symbolIcon = new icon(randomSymbol, 0, `hsl(0, 0.00%, 23.10%)`, 20);     
                         
-                        new polygon(controller, symbolIcon, 6, item.x, item.y, 15, fillColor, 30); 
+                        new polygon(controller, symbolIcon, 6, item.x, item.y, 30, fillColor, 29); 
                     }           
                 } 
 

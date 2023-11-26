@@ -49,7 +49,7 @@ export default class polygon {
 		this.icon.initiator();
 		this.#draw();
 	}
-
+	
 	// #=#=#=#=#=# Draw Polygon #=#=#=#=#=#
 	/**
 	 * @private
@@ -90,7 +90,6 @@ export default class polygon {
 
 		// Zeichne das Symbol in der Mitte des Polygons oder Kreises
 		if (this.icon) {
-			//this.drawSymbol(centerX, centerY);
 			this.icon.drawSymbol(centerX, centerY, this.rotation);
 		}		
 	}	
