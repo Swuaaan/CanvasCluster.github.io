@@ -45,11 +45,11 @@ function handleResize() {
 // Ereignislistener für das "resize"-Ereignis hinzufügen
 window.addEventListener('resize', handleResize);
 
-createArray(0, 60, 60); 
+createArray(0, 40, 40); 
 drawArray();
 
 function createArray (tiltAngle, rowSpace, colSpace) {
-    let columeSpace = ((colSpace + 10) / 2) * canvas.factor;
+    let columeSpace = ((colSpace + 5) / 2) * canvas.factor;
     let rowSpaceing = rowSpace * canvas.factor;
 
     const rows = Math.floor(((window.innerHeight / 100) * 125) / rowSpaceing);
@@ -118,7 +118,7 @@ function drawArray () {
                         let fillColor = `rgba(78, 78, 78, ${alpha})`; // Blau mit variabler Transparenz
                         let symbolIcon = new icon(randomSymbol, 0, `hsla(0, 0.00%, 23.10%, ${alpha})`, 20);
                         
-                        new polygon(controller, symbolIcon, 6, item.x, item.y, 30, fillColor, 29);
+                        new polygon(controller, symbolIcon, 6, item.x, item.y, 20, fillColor, 29);
                     }                     
                 } 
         
@@ -127,7 +127,7 @@ function drawArray () {
                         let fillColor = monokaiColors[Math.floor(Math.random() * monokaiColors.length)];
                         let symbolIcon = new icon(randomSymbol, 0, `hsl(0, 0.00%, 23.10%)`, 20);     
                         
-                        new polygon(controller, symbolIcon, 6, item.x, item.y, 30, fillColor, 29); 
+                        new polygon(controller, symbolIcon, 6, item.x, item.y, 20, fillColor, 29); 
                     }           
                 } 
 
