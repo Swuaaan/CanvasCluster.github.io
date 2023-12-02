@@ -6,7 +6,9 @@ import polygon from './polygon.js';
  * 	1. Icon
  * 		1.1 Variables
  * 		1.2 Constructor
- * 		1.3 
+ * 		1.3 Draw Symbol
+ * 		1.4 Set Size
+ * 		1.5 Initiator
  */
 
 
@@ -50,6 +52,8 @@ export default class icon {
 		// #==== Functions ====#
 	}
 
+
+	// #=#=#=#=#=# 1.3 Draw Symbol #=#=#=#=#=#
 	drawSymbol(x, y, iconRot) {
 		canvas.context.fillStyle		= this.color; // Farbe des Symbols
 		canvas.context.font				= this.symfont; // Dynamische Schriftgröße basierend auf der Bildschirmbreite
@@ -64,18 +68,14 @@ export default class icon {
 		// Rotiere den Kontext um den Winkel der Symbolrotation
 		canvas.context.translate(x, y);
 		canvas.context.rotate(symbolRotation);
-
-		//this.canvas.context.fillText(this.icon, 0, 0);
+		// TODO include Transperency
+		// this.canvas.context.fillText(this.icon, 0, 0);
 		canvas.context.fillText(this.symbol, 0, 0);
 
 		canvas.context.restore(); // Stelle den ursprünglichen Zustand des Kontexts wieder her
 	}	
 
-	initiator () {
-		this.size = this.setSize();
-		this.symfont		= `${this.size}px FontAwesome`;				// Standard-Font	
-	}
-
+	// #=#=#=#=#=# 1.4 Set Size #=#=#=#=#=#
 	setSize() {
 		if (this.size != null) {
 			return (this.size * canvas.factor);		
@@ -83,5 +83,11 @@ export default class icon {
 		else {
 			return (this.polygon.size / 100) * 60;
 		}
+	}
+
+	// #=#=#=#=#=# 1.5 Initiator #=#=#=#=#=#
+	initiator () {
+		this.size = this.setSize();
+		this.symfont		= `${this.size}px FontAwesome`;				// Standard-Font	
 	}
 }

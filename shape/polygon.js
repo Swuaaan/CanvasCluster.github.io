@@ -22,6 +22,8 @@ export default class polygon {
 	/** @type	{icon} */
 	icon;
 
+	//TODO include Transperency
+
 	// #=#=#=#=#=# Constructor #=#=#=#=#=#
 	constructor(
 		canvas,
