@@ -4,3 +4,10 @@ This project is a simple HTML and JavaScript application that allows you to draw
 
 This project was inspired by [Sebastian Hahner](https://github.com/sebinside/).
 
+> [!NOTE]
+> This project is still a work in progress.
+
+- [x] Create the base functions.
+- [ ] Optimise the colour of the polygons.
+- [ ] Optimise the icon selection
+
