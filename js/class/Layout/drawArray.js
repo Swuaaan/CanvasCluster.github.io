@@ -11,10 +11,10 @@
 /* ================================================== */
 /* 1. Imports */
 /* -------------------------------------------------- */
-import polygon from './shape/polygon.js';
-import canvas from './controller/canvas.js';
-import icon from './shape/icon.js';
-import drawArray from './Layout/drawArray.js';
+// import polygon from './shape/polygon.js';
+// import canvas from './controller/canvas.js';
+// import icon from './shape/icon.js';
+// import drawArray from './Layout/drawArray.js';
 
 
 /* ================================================== */

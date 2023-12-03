@@ -10,9 +10,9 @@
 /* ================================================== */
 /* 1. Imports */
 /* -------------------------------------------------- */
-import polygon from './shape/polygon.js';
-import canvas from './controller/canvas.js';
-import icon from './shape/icon.js';
+import polygon from '../js/class/shape/polygon.js';
+import canvas from '../js/class/controller/canvas.js';
+import icon from '../js/class/shape/icon.js';
 
 // Beispiel: Erstelle ein Canvas-Manager und ein Polygon mit 6 Ecken und einem Copyright-Symbol
 const	controller		= new canvas('myCanvas', 'hsl(0, 0.00%, 23.10%)');

@@ -1,5 +1,5 @@
 import canvas	from '../controller/canvas.js';
-import polygon from './polygon.js';
+import polygon 	from './polygon.js';
 
 /**
  * Inhaltsverzeichnis
