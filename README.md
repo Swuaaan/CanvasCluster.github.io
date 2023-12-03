@@ -7,6 +7,9 @@ This project was inspired by [Sebastian Hahner](https://github.com/sebinside/).
 > [!NOTE]
 > This project is still a work in progress.
 
+> [!TIP]
+> Test the Projekt [CanvasCluster](https://swuaaan.github.io/CanvasCluster.github.io/).
+
 - [x] Create the base functions.
 - [ ] Optimise the colour of the polygons.
 - [ ] Optimise the icon selection
