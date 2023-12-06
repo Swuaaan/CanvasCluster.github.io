@@ -13,6 +13,7 @@
 import polygon from '../js/class/shape/polygon.js';
 import canvas from '../js/class/controller/canvas.js';
 import icon from '../js/class/shape/icon.js';
+import settings from '../settings.json' assert {type: 'json'};
 
 // Beispiel: Erstelle ein Canvas-Manager und ein Polygon mit 6 Ecken und einem Copyright-Symbol
 const	controller		= new canvas('myCanvas', 'hsl(0, 0.00%, 23.10%)');
@@ -59,12 +60,12 @@ function handleResize() {
 }
 
 // setInterval, um die Funktion alle 10 Sekunden aufzurufen
-// setInterval(handleResize, 1000); // 10000 Millisekunden entsprechen 10 Sekunden
+// setInterval(handleResize, 1000); // 1000 Millisekunden entsprechen 10 Sekunden
 
 // Ereignislistener für das "resize"-Ereignis hinzufügen
 window.addEventListener('resize', handleResize);
 
-createArray(0, 40, 40); 
+createArray(settings.rotation, settings.rowspaching, settings.columspaching ); 
 drawArray();
 
 function createArray (tiltAngle, rowSpace, colSpace) {
@@ -104,12 +105,6 @@ function createArray (tiltAngle, rowSpace, colSpace) {
 
 
 function drawArray () {
-	// Prozentuale Chance, dass Polygone nicht eingefärbt werden
-	const noFillChanceCol = 0.33; // Zum Beispiel 20% Chance, dass kein Fill stattfindet
-	const noFillChanceGra = 0.66; // Zum Beispiel 20% Chance, dass kein Fill stattfindet
-	const clusterSize = 200; // px 
-	const fadeSize = 300;
-	const fadeoffset = 0;
 
 	while(clustermid.length > 0) {
 		let cluster = clustermid.shift();
@@ -121,19 +116,19 @@ function drawArray () {
 			const distance = Math.sqrt((item.x - cluster.x) ** 2 + (item.y - cluster.y) ** 2);
 
 			// Berechnung des Fade-Offsets, indem fadeDistance vom Abstand subtrahiert wird
-			const fadeOffset = Math.max(0, distance - fadeoffset);
+			const fadeOffset = Math.max(0, distance - settings.fadeoffset);
 
 			// Setzen der Transparenz basierend auf dem Abstand und Fade-Offset
-			let alpha = 1 - fadeOffset / fadeSize; // Ändere den Divisor nach Bedarf
+			let alpha = 1 - fadeOffset / settings.fadeSize; // Ändere den Divisor nach Bedarf
 
 			// Begrenze den Alpha-Wert im Bereich [0, 1]
 			alpha = Math.max(0, Math.min(1, alpha));
 	
-			let randomSymbol = fontAwesomeSymbols[Math.floor(Math.random() * fontAwesomeSymbols.length)];
+			let randomSymbol = settings.symbols[Math.floor(Math.random() * settings.symbols.length)];
 			
-			if ((distance < clusterSize || distance < fadeSize) && (item.generat !== true)) {
-				if (Math.random() > noFillChanceCol) {
-					if (Math.random() > noFillChanceGra) {
+			if ((distance < settings.clusterSize || distance < settings.fadeSize) && (item.generat !== true)) {
+				if (Math.random() > settings.noFillChanceColore) {
+					if (Math.random() > settings.noFillChanceGra) {
 						let fillColor = `rgba(78, 78, 78, ${alpha})`; // Blau mit variabler Transparenz
 						let symbolIcon = new icon(randomSymbol, 0, `hsla(0, 0.00%, 23.10%, ${alpha})`, 20);
 						
@@ -142,8 +137,8 @@ function drawArray () {
 				}
 		
 				else {
-					if (distance < clusterSize) {
-						let fillColor = monokaiColors[Math.floor(Math.random() * monokaiColors.length)];
+					if (distance < settings.clusterSize) {
+						let fillColor = settings.colors[Math.floor(Math.random() * settings.colors.length)];
 						let symbolIcon = new icon(randomSymbol, 0, `hsl(0, 0.00%, 23.10%)`, 20);     
 						
 						new polygon(controller, symbolIcon, 6, item.x, item.y, 20, fillColor, 29); 
@@ -155,20 +150,4 @@ function drawArray () {
 			}
 		}
 	}
-}
-
-
-getSettings().then(response => {
-	console.log(response.colors);
-});
-
-
-/* ================================================== */
-/* .  */
-/* -------------------------------------------------- */
-async function getSettings() {
-	const	response	= await fetch('./settings.json'),
-			settings	= await response.json();
-
-	return settings;
 }
