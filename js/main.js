@@ -15,8 +15,8 @@ import Array from './class/Layout/drawArray.js';
 
 new Array(settings.rotation, settings.rowspaching, settings.columspaching);
 
-// const   positionArray = [],     // Array zum Speichern der x- und y-Koordinaten jeder Position
-// 		clustermid = [];        // Array zum Speichern der x- und y-Koordinaten jeder Position
+// const   	positionArray = [],     // Array zum Speichern der x- und y-Koordinaten jeder Position
+// 			clustermid = [];        // Array zum Speichern der x- und y-Koordinaten jeder Position
 
 // Funktion, die aufgerufen wird, wenn die Fenstergröße geändert wird
 function handleResize() {
