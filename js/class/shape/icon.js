@@ -31,6 +31,8 @@ export default class icon {
 	symfont;
 	/**	@type		{polygon} */
 	polygon;
+	/** @type	{number} */
+	transparency;
 
 		// #==== Initialized ====#
 	
@@ -39,23 +41,28 @@ export default class icon {
 	// #=#=#=#=#=# 1.2 Constructor #=#=#=#=#=#
 	constructor(
 		symbol				= null,
-		rotation			= null,
 		color				= '#ffffff',
-		size				= null,	
+		transparency		= 1,
+		size				= null,
+		rotation			= null
+		
 	) {
 		// #==== Variables ====#
 		this.color 			= color;
 		this.symbol			= symbol;
 		this.size			= size;
 		this.rotation		= rotation;	
+		this.transparency	= transparency;
 		
 		// #==== Functions ====#
 	}
 
+	
 
 	// #=#=#=#=#=# 1.3 Draw Symbol #=#=#=#=#=#
 	drawSymbol(x, y, iconRot) {
 		canvas.context.fillStyle		= this.color; // Farbe des Symbols
+		canvas.context.globalAlpha 		= this.transparency;
 		canvas.context.font				= this.symfont; // Dynamische Schriftgröße basierend auf der Bildschirmbreite
 		canvas.context.textAlign		= 'center'; // Zentriere den Text horizontal
 		canvas.context.textBaseline		= 'middle'; // Zentriere den Text vertikal
@@ -77,17 +84,18 @@ export default class icon {
 
 	// #=#=#=#=#=# 1.4 Set Size #=#=#=#=#=#
 	setSize() {
+		console.log(this.size);
 		if (this.size != null) {
 			return (this.size * canvas.factor);		
 		}
 		else {
-			return (this.polygon.size / 100) * 60;
+			return (this.polygon.size / 100) * 80;
 		}
 	}
 
 	// #=#=#=#=#=# 1.5 Initiator #=#=#=#=#=#
 	initiator () {
-		this.size = this.setSize();
+		this.size 			= this.setSize();
 		this.symfont		= `${this.size}px FontAwesome`;				// Standard-Font	
 	}
 }

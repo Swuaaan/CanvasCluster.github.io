@@ -12,9 +12,9 @@
 /* 1. Imports */
 /* -------------------------------------------------- */
 
-import polygon from '../shape/polygon.js';
-import canvas from '../controller/canvas.js';
-import icon from '../shape/icon.js';
+import polygon  from '../shape/polygon.js';
+import canvas   from '../controller/canvas.js';
+import icon     from '../shape/icon.js';
 import settings from '../../../settings.json' assert {type: 'json'};
 
 
@@ -56,11 +56,11 @@ export default class Array {
 	 * @private
 	 */
 	#createArray () {
-        let columeSpace = ((this.colSpace + 5) / 2) * canvas.factor,
-            rowSpaceing = this.rowSpace * canvas.factor;
+        let     columeSpace = ((this.colSpace + 5) / 2) * canvas.factor,
+                rowSpaceing = this.rowSpace * canvas.factor;
     
-        const	rows = Math.floor(((canvas.windowwidth / 100) * 125) / rowSpaceing),
-                columns = Math.floor(((canvas.windowwidth / 100) * 125) / columeSpace);
+        const	rows        = Math.floor(((canvas.windowwidth / 100) * 125) / rowSpaceing),
+                columns     = Math.floor(((canvas.windowwidth / 100) * 125) / columeSpace);
     
         for (let row = -100; row <= rows; row++) {
             for (let col = -100; col <= columns; col++) {
@@ -116,19 +116,37 @@ export default class Array {
                 if ((distance < settings.clusterSize || distance < settings.fadeSize) && (item.generat !== true)) {
                     if (Math.random() > settings.noFillChanceColore) {
                         if (Math.random() > settings.noFillChanceGra) {
-                            let fillColor = `rgba(78, 78, 78, ${alpha})`; // Blau mit variabler Transparenz
-                            let symbolIcon = new icon(randomSymbol, 0, `hsla(0, 0.00%, 23.10%, ${alpha})`, settings.iconsize);
+                            let symbolIcon = new icon(randomSymbol, settings.iconcolore, alpha, settings.iconsize, settings.iconrotaion);
                             
-                            new polygon(controller, symbolIcon, 6, item.x, item.y, settings.polygonsize, fillColor, settings.polygonrotaion);
+                            new polygon(
+                                controller, 
+                                symbolIcon, 
+                                6, 
+                                item.x, 
+                                item.y, 
+                                settings.polygonsize, 
+                                settings.fadecolore, 
+                                settings.polygonrotaion, 
+                                alpha
+                            );                            
                         }
                     }
             
                     else {
                         if (distance < settings.clusterSize) {
                             let fillColor = settings.colors[Math.floor(Math.random() * settings.colors.length)];
-                            let symbolIcon = new icon(randomSymbol, 0, settings.iconcolore, settings.iconsize);     
+                            let symbolIcon = new icon(randomSymbol, settings.iconcolore, 1, settings.iconsize, settings.iconrotaion);   
                             
-                            new polygon(controller, symbolIcon, 6, item.x, item.y, settings.polygonsize, fillColor, settings.polygonrotaion); 
+                            new polygon(
+                                controller, 
+                                symbolIcon, 
+                                6,
+                                item.x, 
+                                item.y, 
+                                settings.polygonsize, 
+                                fillColor, 
+                                settings.polygonrotaion
+                            ); 
                         }
                     } 
     
