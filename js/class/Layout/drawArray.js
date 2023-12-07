@@ -1,8 +1,3 @@
-import polygon from '../shape/polygon.js';
-import canvas from '../controller/canvas.js';
-import icon from '../shape/icon.js';
-import settings from '../../../settings.json' assert {type: 'json'};
-
 /**
  * DrawArray.js
  * 
@@ -16,21 +11,29 @@ import settings from '../../../settings.json' assert {type: 'json'};
 /* ================================================== */
 /* 1. Imports */
 /* -------------------------------------------------- */
-// import polygon from './shape/polygon.js';
-// import canvas from './controller/canvas.js';
-// import icon from './shape/icon.js';
-// import drawArray from './Layout/drawArray.js';
 
-// Beispiel: Erstelle ein Canvas-Manager und ein Polygon mit 6 Ecken und einem Copyright-Symbol
-const	controller		= new canvas('myCanvas', settings.backcolore);
+import polygon from '../shape/polygon.js';
+import canvas from '../controller/canvas.js';
+import icon from '../shape/icon.js';
+import settings from '../../../settings.json' assert {type: 'json'};
 
-const   positionArray = [],     // Array zum Speichern der x- und y-Koordinaten jeder Position
-		clustermid = [];        // Array zum Speichern der x- und y-Koordinaten jeder Position
+
+const	controller		= new canvas('myCanvas', settings.backcolore),
+        positionArray   = [],     
+		clustermid      = [];      
 
 /* ================================================== */
 /* 2. Draw Array */
 /* -------------------------------------------------- */
 export default class Array {
+
+    	// #==== Uninitialized ====#
+	/** @type	{number} */
+	tiltAngle;
+	/** @type	{number} */
+	rowSpace;
+	/** @type	{number} */
+	colSpace;
 
     constructor(
 		tiltAngle, 
@@ -43,18 +46,21 @@ export default class Array {
 		this.colSpace		= colSpace;
 
 		// #==== Functions ====#
-        this.createArray();
-        this.drawArray();
-		
-	}
+        this.#createArray();
+        this.#drawArray();
 
-	// #=#=#=#=#=#  #=#=#=#=#=#
-	createArray () {
+	}
+	
+    // #=#=#=#=#=# Create Array #=#=#=#=#=#
+	/**
+	 * @private
+	 */
+	#createArray () {
         let columeSpace = ((this.colSpace + 5) / 2) * canvas.factor,
             rowSpaceing = this.rowSpace * canvas.factor;
     
-        const	rows = Math.floor(((window.innerHeight / 100) * 125) / rowSpaceing),
-                columns = Math.floor(((window.innerWidth / 100) * 125) / columeSpace);
+        const	rows = Math.floor(((canvas.windowwidth / 100) * 125) / rowSpaceing),
+                columns = Math.floor(((canvas.windowwidth / 100) * 125) / columeSpace);
     
         for (let row = -100; row <= rows; row++) {
             for (let col = -100; col <= columns; col++) {
@@ -70,9 +76,7 @@ export default class Array {
                     y: polygonY
                 })
     
-                const cluster = 0.019; // Zum Beispiel 20% Chance, dass kein Fill stattfindet
-    
-                if (Math.random() < cluster) {
+                if (Math.random() < settings.clusterchance) {
                     clustermid.push({
                         x: polygonX,
                         y: polygonY,
@@ -83,7 +87,11 @@ export default class Array {
         }
     }
 
-    drawArray () {
+    // #=#=#=#=#=# Draw Array #=#=#=#=#=#
+	/**
+	 * @private
+	 */
+    #drawArray () {
 
         while(clustermid.length > 0) {
             let cluster = clustermid.shift();
@@ -109,18 +117,18 @@ export default class Array {
                     if (Math.random() > settings.noFillChanceColore) {
                         if (Math.random() > settings.noFillChanceGra) {
                             let fillColor = `rgba(78, 78, 78, ${alpha})`; // Blau mit variabler Transparenz
-                            let symbolIcon = new icon(randomSymbol, 0, `hsla(0, 0.00%, 23.10%, ${alpha})`, 20);
+                            let symbolIcon = new icon(randomSymbol, 0, `hsla(0, 0.00%, 23.10%, ${alpha})`, settings.iconsize);
                             
-                            new polygon(controller, symbolIcon, 6, item.x, item.y, 20, fillColor, 29);
+                            new polygon(controller, symbolIcon, 6, item.x, item.y, settings.polygonsize, fillColor, settings.polygonrotaion);
                         }
                     }
             
                     else {
                         if (distance < settings.clusterSize) {
                             let fillColor = settings.colors[Math.floor(Math.random() * settings.colors.length)];
-                            let symbolIcon = new icon(randomSymbol, 0, settings.backcolore, 20);     
+                            let symbolIcon = new icon(randomSymbol, 0, settings.iconcolore, settings.iconsize);     
                             
-                            new polygon(controller, symbolIcon, 6, item.x, item.y, 20, fillColor, 29); 
+                            new polygon(controller, symbolIcon, 6, item.x, item.y, settings.polygonsize, fillColor, settings.polygonrotaion); 
                         }
                     } 
     

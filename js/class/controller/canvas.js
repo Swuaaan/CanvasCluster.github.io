@@ -12,6 +12,7 @@
  * 
  */
 
+import settings from '../../../settings.json' assert {type: 'json'};
 
 /* ================================================== */
 /* 1. Canvas */
@@ -27,7 +28,9 @@ export default class canvas {
 
 		// #==== Initialized			| Static ====#
 	/** @type {number} */
-		static	factor				= window.innerWidth / 1920;
+		static	windowwidth				= window.innerWidth;
+	/** @type {number} */
+		static	factor					= this.windowwidth / settings.defautwidth;
 	/** @type {CanvasRenderingContext2D} */
 		static  context;
 
