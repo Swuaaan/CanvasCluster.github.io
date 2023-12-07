@@ -135,6 +135,7 @@ export default class Array {
                     else {
                         if (distance < settings.clusterSize) {
                             let fillColor = settings.colors[Math.floor(Math.random() * settings.colors.length)];
+                            // let fillColor = ;
                             let symbolIcon = new icon(randomSymbol, settings.iconcolore, 1, settings.iconsize, settings.iconrotaion);   
                             
                             new polygon(

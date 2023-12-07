@@ -75,7 +75,7 @@ export default class icon {
 		// Rotiere den Kontext um den Winkel der Symbolrotation
 		canvas.context.translate(x, y);
 		canvas.context.rotate(symbolRotation);
-		// TODO include Transperency
+
 		// this.canvas.context.fillText(this.icon, 0, 0);
 		canvas.context.fillText(this.symbol, 0, 0);
 

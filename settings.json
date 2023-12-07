@@ -5,7 +5,7 @@
 
 	"defautwidth": 1920,
 
-	"rotation": 10,
+	"rotation": 0,
 	"rowspaching": 40,
 	"columspaching": 40,
 	"clusterchance": 0.019,
