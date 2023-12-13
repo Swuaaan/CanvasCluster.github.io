@@ -110,7 +110,7 @@ export default class Array {
     
                 // Begrenze den Alpha-Wert im Bereich [0, 1]
                 alpha = Math.max(0, Math.min(1, alpha));
-        
+
                 let randomSymbol = settings.symbols[Math.floor(Math.random() * settings.symbols.length)];
                 
                 if ((distance < settings.clusterSize || distance < settings.fadeSize) && (item.generat !== true)) {

@@ -1,6 +1,6 @@
 {	
 	"backcolore": "hsl(0, 0.00%, 23.10%)",
-	"iconcolore": "hsl(0, 0.00%, 0%)",
+	"iconcolore": "hsl(0, 100.00%, 50.00%)",
 	"fadecolore": "hsl(0, 0.00%, 29.40%)",
 
 	"defautwidth": 1920,
@@ -18,7 +18,7 @@
 	"iconsize": 20,
 	"polygonsize": 20,
 	"polygonrotaion": 29,
-	"iconrotaion": 0,
+	"iconrotaion": 45,
 
 
 	"colors":	[
@@ -43,5 +43,18 @@
 		"\uf2dc",
 		"\uf11b",
 		"\uf1c0"
-	]	
+	],	
+
+	"svgs":	[
+		"\uf2b9",
+		"\uf1f8",
+		"\uf0c8",
+		"\uf17d",
+		"\uf06e",
+		"\uf135",
+		"\uf219",
+		"\uf2dc",
+		"\uf11b",
+		"\uf1c0"
+	]
 }
