@@ -111,7 +111,7 @@ export default class Array {
                 // Begrenze den Alpha-Wert im Bereich [0, 1]
                 alpha = Math.max(0, Math.min(1, alpha));
 
-                let randomSymbol = settings.symbols[Math.floor(Math.random() * settings.symbols.length)];
+                let randomSymbol = settings.svgs[Math.floor(Math.random() * settings.svgs.length)];
                 
                 if ((distance < settings.clusterSize || distance < settings.fadeSize) && (item.generat !== true)) {
                     if (Math.random() > settings.noFillChanceColore) {
@@ -121,7 +121,7 @@ export default class Array {
                             new polygon(
                                 controller, 
                                 symbolIcon, 
-                                6, 
+                                2, 
                                 item.x, 
                                 item.y, 
                                 settings.polygonsize, 
@@ -141,7 +141,7 @@ export default class Array {
                             new polygon(
                                 controller, 
                                 symbolIcon, 
-                                6,
+                                2,
                                 item.x, 
                                 item.y, 
                                 settings.polygonsize, 

@@ -1,5 +1,6 @@
 import canvas	from '../controller/canvas.js';
 import polygon 	from './polygon.js';
+import settings from '../../../settings.json' assert {type: 'json'};
 
 /**
  * Inhaltsverzeichnis
@@ -85,12 +86,22 @@ export default class icon {
 	
 
 	drawSymbol(x, y, iconRot) {
-		const svgString = '<svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>';
 
-		
+		// const svgString = settings.svgs[1];
+
+		// console.log(svgString);
+
+		// const svgString = '<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M176 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64c-35.3 0-64 28.7-64 64H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64c0 35.3 28.7 64 64 64v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448c35.3 0 64-28.7 64-64h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V280h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V176h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H280V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H176V24zM160 128H352c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm192 32H160V352H352V160z"/></svg>';
 		
 		// Ersetzen Sie die Farbe im SVG-String durch Rot
-		const colored  = svgString.substring(0, 5) + `fill="${this.color}" ` + svgString.substring(5);
+		const resized  = this.symbol.substring(0, 40) + `height="${this.size}" width="${this.size}" ` + this.symbol.substring(62);
+		
+		// console.log(resized);
+
+		// Ersetzen Sie die Farbe im SVG-String durch Rot
+		const colored  = resized.substring(0, 5) + `fill="${this.color}" ` + resized.substring(5);
+
+		// console.log(colored);
 
 		// Erstelle ein neues Image-Objekt
 		var img = new Image();
@@ -107,12 +118,9 @@ export default class icon {
 			// Rotiere den Kontext um den gewünschten Winkel (in Grad)
 			canvas.context.translate(x, y);
 	
-			// const symbolRotation = this.rotation != null ? (this.rotation * Math.PI) / 180 : iconRot;
+			const symbolRotation = this.rotation != null ? (this.rotation * Math.PI) / 180 : iconRot;
 			
-			canvas.context.rotate(this.rotation); // Umrechnung von Grad in Bogenmaß
-			//TODO scale an passen
-			// Ändere die Größe des Symbols
-			canvas.context.scale(2, 2);
+			canvas.context.rotate(symbolRotation); // Umrechnung von Grad in Bogenmaß
 	
 			// Zeichne das Bild ohne Farbänderung
 			canvas.context.drawImage(img, -img.width / 2, -img.height / 2);
