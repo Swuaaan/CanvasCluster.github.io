@@ -64,12 +64,12 @@ export default class Array {
     
         for (let row = -100; row <= rows; row++) {
             for (let col = -100; col <= columns; col++) {
-                const angle = this.tiltAngle * (Math.PI / 180);
-                const x = col * columeSpace + (row * columeSpace);
-                const y = row * rowSpaceing;
+                const angle = this.tiltAngle * (Math.PI / 180),
+                      x = col * columeSpace + (row * columeSpace),
+                      y = row * rowSpaceing;
     
-                const polygonX = x + Math.cos(angle) * columeSpace * col;
-                const polygonY = y + Math.sin(angle) * columeSpace * col;
+                const polygonX = x + Math.cos(angle) * columeSpace * col,
+                      polygonY = y + Math.sin(angle) * columeSpace * col;
     
                 positionArray.push({
                     x: polygonX,
@@ -121,7 +121,7 @@ export default class Array {
                             new polygon(
                                 controller, 
                                 symbolIcon, 
-                                2, 
+                                6, 
                                 item.x, 
                                 item.y, 
                                 settings.polygonsize, 
@@ -135,13 +135,13 @@ export default class Array {
                     else {
                         if (distance < settings.clusterSize) {
                             let fillColor = settings.colors[Math.floor(Math.random() * settings.colors.length)];
-                            // let fillColor = ;
+
                             let symbolIcon = new icon(randomSymbol, settings.iconcolore, 1, settings.iconsize, settings.iconrotaion);   
                             
                             new polygon(
                                 controller, 
                                 symbolIcon, 
-                                2,
+                                6,
                                 item.x, 
                                 item.y, 
                                 settings.polygonsize, 

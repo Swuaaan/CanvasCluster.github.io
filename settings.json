@@ -3,9 +3,9 @@
 	"iconcolore": "#000000",
 	"fadecolore": "hsl(0, 0.00%, 29.40%)",
 
-	"defautwidth": 1920,
+	"defautheight": 1080,
 
-	"rotation": 10,
+	"rotation": 0,
 	"rowspaching": 40,
 	"columspaching": 40,
 	"clusterchance": 0.019,
@@ -15,7 +15,7 @@
 	"fadeSize": 300,
 	"fadeoffset": 0,
 
-	"iconsize": 30,
+	"iconsize": 25,
 	"polygonsize": 20,
 	"polygonrotaion": 29,
 	"iconrotaion": 0,
