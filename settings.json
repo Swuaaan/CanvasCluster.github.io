@@ -15,7 +15,7 @@
 	"fadeSize": 300,
 	"fadeoffset": 0,
 
-	"iconsize": 40,
+	"iconsize": 30,
 	"polygonsize": 20,
 	"polygonrotaion": 30,
 	"iconrotaion": 0,
@@ -30,5 +30,23 @@
 		"hsl(204, 86%, 53%)",
 		"hsl(16, 72%, 51%)",
 		"hsl(209, 56%, 63%)"
+	],
+
+	"icons": [
+		"file",
+		"filter",
+		"gear",
+		"folder",
+		"code",
+		"bug",
+		"mug-saucer",
+		"network-wired",
+		"sitemap",
+		"microchip",
+		"discord",
+		"docker",
+		"stack-overflow",
+		"android"
 	]
+
 }

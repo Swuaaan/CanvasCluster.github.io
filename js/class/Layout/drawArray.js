@@ -16,7 +16,7 @@ import polygon  from '../shape/polygon.js';
 import canvas   from '../controller/canvas.js';
 import icon     from '../shape/icon.js';
 import settings from '../../../settings.json' assert {type: 'json'};
-import svgs     from '../../../font-awesome/icons.json' assert {type: 'json'};
+import paths     from '../../../font-awesome/icons.json' assert {type: 'json'};
 
 
 const	controller		= new canvas('myCanvas', settings.backcolore),
@@ -113,7 +113,10 @@ export default class Array {
                 alpha = Math.max(0, Math.min(1, alpha));
 
                 // let randomSymbol = settings.svgs[Math.floor(Math.random() * settings.svgs.length)];
-                let randomSymbol = svgs.youtube.svg.brands
+                // let randomSymbol = paths.fire.svg.solid;
+                let randomSymbol = this.#choosePath(settings.icons[Math.floor(Math.random() * settings.icons.length)]);       
+                
+                // console.log(randomSymbol);
                 
                 if ((distance < settings.clusterSize || distance < settings.fadeSize) && (item.generat !== true)) {
                     if (Math.random() > settings.noFillChanceColore) {
@@ -158,5 +161,10 @@ export default class Array {
                 }
             }
         }
-    }    
+    } 
+    
+    #choosePath (icon) {
+        return paths[icon].svg.solid || paths[icon].svg.brands;
+    }
+
 }

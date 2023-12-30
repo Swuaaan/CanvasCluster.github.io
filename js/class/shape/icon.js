@@ -60,10 +60,9 @@ export default class icon {
 	
 	drawSymbol(x, y, iconRot) {
 
-		let xPathfactor = settings.iconsize / this.symbol.width,
-			yPathfactor = settings.iconsize / this.symbol.height,
-			xPathOffset = (this.symbol.width * xPathfactor) / 2,
-			yPathOffset = (this.symbol.height * yPathfactor) / 2;
+		let Pathfactor = settings.iconsize / this.symbol.height,			
+			xPathOffset = (this.symbol.width * Pathfactor) / 2,
+			yPathOffset = (this.symbol.height * Pathfactor) / 2;
 	
 		canvas.context.save();
 	
@@ -76,7 +75,7 @@ export default class icon {
 		// Adjust the translation to the center of the icon
 		canvas.context.translate(-xPathOffset, -yPathOffset);
 	
-		canvas.context.scale(xPathfactor, yPathfactor);
+		canvas.context.scale(Pathfactor, Pathfactor);
 	
 		const path = new Path2D(this.symbol.path);
 	
