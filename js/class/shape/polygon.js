@@ -1,6 +1,7 @@
 // Polygone_Gen/Polygon_Gen.js
 import canvas	from '../controller/canvas.js';
 import icon		from './icon.js';
+import settings from '../../../settings.json' assert {type: 'json'};
 
 export default class polygon {
 	// #=#=#=#=#=# Variables #=#=#=#=#=#
@@ -43,7 +44,7 @@ export default class polygon {
 		this.icon				= icon;
 		this.cornerCount		= cornerCount;
 		this.color				= color;				// Das Symbol, das im Polygon angezeigt werden soll
-		this.rotation			= ((Math.PI / 180) * rotation);				// Anfangsrotation in Radiant
+		this.rotation			= rotation;				// Anfangsrotation in Radiant
 		this.size				= (size * canvas.factor);					// Radius des Polygons
 		this.x					= x;					// X-Koordinate des Polygons (kann null sein, um die Bildschirmmitte zu verwenden)
 		this.y					= y;					// Y-Koordinate des Polygons (kann null sein, um die Bildschirmmitte zu verwenden)
@@ -61,7 +62,7 @@ export default class polygon {
 	/**
 	 * @private
 	 */
-	#draw() {
+	#draw () {
 		// window.getComputedStyle(this.controller.element)
 
 		const	centerX		= this.x != null ? this.x : this.controller.element.width / 2,
@@ -79,7 +80,7 @@ export default class polygon {
 		} else {
 			// Ansonsten zeichne das Polygon
 			for (let i = 0; i < this.cornerCount; i++) {
-				const angle = (i * 2 * Math.PI) / this.cornerCount + this.rotation;
+				const angle = (i * 2 * Math.PI) / this.cornerCount + ((Math.PI / 180) * this.rotation);
 				const x = centerX + this.size * Math.cos(angle);
 				const y = centerY + this.size * Math.sin(angle);
 
@@ -98,7 +99,18 @@ export default class polygon {
 
 		// Zeichne das Symbol in der Mitte des Polygons oder Kreises
 		if (this.icon) {
-			this.icon.drawSymbol(centerX, centerY, this.rotation);
+			
+			this.icon.drawSymbol(centerX, centerY, this.#handelRotation());
 		}		
-	}	
+	}
+	
+	#handelRotation () {
+		if (settings.iconrotaion != null) {
+			return settings.iconrotaion;
+
+		} else {
+			return this.rotation;
+
+		}
+	}
 }
