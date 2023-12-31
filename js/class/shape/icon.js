@@ -79,7 +79,7 @@ export default class icon {
 	
 		const path = new Path2D(this.symbol.path);
 	
-		canvas.context.fillStyle = settings.iconcolore;
+		canvas.context.fillStyle = this.color;
 		canvas.context.fill(path);
 	
 		canvas.context.restore();

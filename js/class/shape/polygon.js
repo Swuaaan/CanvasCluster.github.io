@@ -80,9 +80,9 @@ export default class polygon {
 		} else {
 			// Ansonsten zeichne das Polygon
 			for (let i = 0; i < this.cornerCount; i++) {
-				const angle = (i * 2 * Math.PI) / this.cornerCount + ((Math.PI / 180) * this.rotation);
-				const x = centerX + this.size * Math.cos(angle);
-				const y = centerY + this.size * Math.sin(angle);
+				const angle = (i * 2 * Math.PI) / this.cornerCount + ((Math.PI / 180) * this.rotation),
+				 		x 	= centerX + this.size * Math.cos(angle),
+				 		y 	= centerY + this.size * Math.sin(angle);
 
 				vertices.push({ x, y }); 
 
@@ -98,10 +98,8 @@ export default class polygon {
 		canvas.context.fill();
 
 		// Zeichne das Symbol in der Mitte des Polygons oder Kreises
-		if (this.icon) {
+		if (this.icon) this.icon.drawSymbol(centerX, centerY, this.#handelRotation());
 			
-			this.icon.drawSymbol(centerX, centerY, this.#handelRotation());
-		}		
 	}
 	
 	#handelRotation () {

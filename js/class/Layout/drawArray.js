@@ -12,16 +12,20 @@
 /* 1. Imports */
 /* -------------------------------------------------- */
 
-import polygon  from '../shape/polygon.js';
-import canvas   from '../controller/canvas.js';
-import icon     from '../shape/icon.js';
-import settings from '../../../settings.json' assert {type: 'json'};
-import paths     from '../../../font-awesome/icons.json' assert {type: 'json'};
+import polygon      from '../shape/polygon.js';
+import canvas       from '../controller/canvas.js';
+import icon         from '../shape/icon.js';
+import settings     from '../../../settings.json' assert {type: 'json'};
+import paths        from '../../../font-awesome/icons.json' assert {type: 'json'};
+import selection    from '../Layout/weightedSelection.js';
 
 
 const	controller		= new canvas('myCanvas', settings.backcolore),
         positionArray   = [],     
-		clustermid      = [];      
+		clustermid      = [],
+        selector       = new selection(settings.colors);  
+
+
 
 /* ================================================== */
 /* 2. Draw Array */
@@ -60,8 +64,8 @@ export default class Array {
         let     columeSpace = ((this.colSpace + 5) / 2) * canvas.factor,
                 rowSpaceing = this.rowSpace * canvas.factor;
     
-        const	rows        = Math.floor(((canvas.windowwidth / 100) * 125) / rowSpaceing),
-                columns     = Math.floor(((canvas.windowwidth / 100) * 125) / columeSpace);
+        const	rows        = +((Math.floor(((canvas.windowwidth / 100) * 125) / rowSpaceing)).toFixed(1)),
+                columns     = +((Math.floor(((canvas.windowwidth / 100) * 125) / columeSpace)).toFixed(1));
     
         for (let row = -100; row <= rows; row++) {
             for (let col = -100; col <= columns; col++) {
@@ -69,8 +73,8 @@ export default class Array {
                       x = col * columeSpace + (row * columeSpace),
                       y = row * rowSpaceing;
     
-                const polygonX = x + Math.cos(angle) * columeSpace * col,
-                      polygonY = y + Math.sin(angle) * columeSpace * col;
+                const polygonX = +((x + Math.cos(angle) * columeSpace * col).toFixed(1)),
+                      polygonY = +((y + Math.sin(angle) * columeSpace * col).toFixed(1));
     
                 positionArray.push({
                     x: polygonX,
@@ -112,11 +116,7 @@ export default class Array {
                 // Begrenze den Alpha-Wert im Bereich [0, 1]
                 alpha = Math.max(0, Math.min(1, alpha));
 
-                // let randomSymbol = settings.svgs[Math.floor(Math.random() * settings.svgs.length)];
-                // let randomSymbol = paths.fire.svg.solid;
                 let randomSymbol = this.#choosePath(settings.icons[Math.floor(Math.random() * settings.icons.length)]);       
-                
-                // console.log(randomSymbol);
                 
                 if ((distance < settings.clusterSize || distance < settings.fadeSize) && (item.generat !== true)) {
                     if (Math.random() > settings.noFillChanceColore) {
@@ -139,7 +139,16 @@ export default class Array {
             
                     else {
                         if (distance < settings.clusterSize) {
-                            let fillColor = settings.colors[Math.floor(Math.random() * settings.colors.length)];
+                            let coloreindex = selector.generateindex();                             
+                                            
+                                
+                                while (!selector.weightedSelection(item.x, item.y, coloreindex)) {
+                                    coloreindex = selector.generateindex();  
+                                    console.log("false");
+                                }                               
+                                console.log("true");
+                                let fillColor = settings.colors[coloreindex];  
+
 
                             let symbolIcon = new icon(randomSymbol, settings.iconcolore, 1, settings.iconsize, settings.iconrotaion);   
                             
@@ -166,5 +175,25 @@ export default class Array {
     #choosePath (icon) {
         return paths[icon].svg.solid || paths[icon].svg.brands;
     }
+
+    #RandomMonoColore () {
+        
+        // Zufallszahl zwischen 0 und 360 Grad generieren
+        const hue = Math.floor(Math.random() * 360);        
+        
+        const saturation = 100;       
+        
+        const lightness = 75;
+        
+        var color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+        return color;
+          
+    }
+
+    
+
+
+    
 
 }
