@@ -1,6 +1,6 @@
 /**
  * DrawArray.js
- * 
+ *
  * Inhaltsverzeichnis
  * 	1. Imports
  * 	2. weightedSelectioninit
@@ -10,23 +10,22 @@
  * 		2.4 weightedSelection
  * 		2.5 #savePosition
  * 		2.6 generateindex
- */		
+ */
 
 /* ================================================== */
 /* 1. Imports */
 /* -------------------------------------------------- */
 
-import settings from '../../../settings.json' assert {type: 'json'};
+import settings from "../../../settings.json" assert { type: "json" };
 
 /* ================================================== */
 /* 2. weightedSelectioninit */
 /* -------------------------------------------------- */
 
 export default class weightedSelectioninit {
-
 	// #=#=#=#=#=# 2.1 variables #=#=#=#=#=#
-		// #==== initalized ====#
-	
+	// #==== initalized ====#
+
 	/** @type	{number} */
 	static lastposition = {};
 
@@ -38,16 +37,14 @@ export default class weightedSelectioninit {
 
 	// #=#=#=#=#=# 2.2 constructor #=#=#=#=#=#
 
-	constructor(targetarray) {	
-		
+	constructor(targetarray) {
 		// #==== variables ====#
-		
+
 		this.targetarray = targetarray;
 
 		// #==== Functions ====#
 
-		this.#weightedSelectionInit();  
-
+		this.#weightedSelectionInit();
 	}
 
 	// #=#=#=#=#=# 2.3 weightedSelectionInit #=#=#=#=#=#
@@ -56,22 +53,21 @@ export default class weightedSelectioninit {
 	 * @returns	{number[]}
 	 */
 
-	#weightedSelectionInit () {     
-
+	#weightedSelectionInit() {
 		for (let i = 0; i < this.targetarray.length; i++) {
 			weightedSelectioninit.lastposition[i] = [];
 		}
 	}
 
-	// #=#=#=#=#=# 2.4 weightedSelection #=#=#=#=#=#
-	/**
-	 * Calculates the distance betwen two equel color or icon. And compares the distance to a refrenc
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
-	 * @param {number} position index of the array
-	 * @param {number} refrenc min distance betwen two equel color or icon
+	// #=#=#=#	=#=# 2.4 weightedSelection #=#=#=#=#=#
+	/**	
+	 * Calcula	tes the distance betwentwo equel color or icon. And compares the distance to a refrenc
+	 * @param 	{number} x coordinate x
+	 * @param 	{number} y coordinate y
+	 * @param 	{number} position indexof the array
+	 * @param 	{number} refrenc min distance betwen two equel color or icon
 	 * @returns {boolean} if distance is larger or equel than refrenc or if ther is no other option left than return true
-	 */
+	 */	
 
 	weightedSelection (x, y, position, refrenc) {  
 		
@@ -80,35 +76,38 @@ export default class weightedSelectioninit {
 		// runs throuh all saves position with that index until it finds a distance that is larger than refrenc or until all positions are tested
 		for (let i = 0; i < weightedSelectioninit.lastposition[position].length; i++) {
 			weightedSelectioninit.watchdog++;
-			
+
 			// calculates the distance betwen old and new position
-			const distance = +(Math.hypot((x - weightedSelectioninit.lastposition[position][i].x), (y - weightedSelectioninit.lastposition[position][i].y))).toFixed(1);
-			
+			const distance = +Math.hypot(
+				x - weightedSelectioninit.lastposition[position][i].x,
+				y - weightedSelectioninit.lastposition[position][i].y
+			).toFixed(1);
+
 			if (distance >= refrenc || weightedSelectioninit.watchdog > 100) {
 				return this.#savePosition(x, y, position);
 			}
-		} 
+		}
 
-		return false;				
+		return false;
 	}
 
 	// #=#=#=#=#=# 2.5 #savePosition #=#=#=#=#=#
 	/**
-	 * If called safes x, y, resets failcounter and return true
-	 * @param {number} x coordinate x
-	 * @param {number} y coordinate y
-	 * @param {number} position index of the array
-	 * @returns {boolean} true if called
+	 * If calledsafes x, y, resets failcounter and return true
+	 * @param 	{number} x coordinate x
+	 * @param 	{number} y coordinate y
+	 * @param 	{number} position index of the array
+	 * @returns	{boolean} true if called
 	 */
 
-	#savePosition (x, y, position) {
+	#savePosition(x, y, position) {
 		weightedSelectioninit.lastposition[position].unshift({
 			x: x,
 			y: y
-		});  
+		});
 
 		weightedSelectioninit.watchdog = 0;
-		
+
 		return true;
 	}
 
@@ -121,7 +120,7 @@ export default class weightedSelectioninit {
 		let coloreindex = Math.floor(Math.random() * length);
 		if (this.lastindex == coloreindex) {
 			this.generateindex();
-		}	
+		}
 
 		return coloreindex;
 	}

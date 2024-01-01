@@ -1,32 +1,27 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Polygon Beispiel</title>
-	<link rel="stylesheet" href="./css/styles.css">
-	
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Polygon Beispiel</title>
+        <link rel="stylesheet" href="./css/styles.css" />
 
-	<style>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
 
-		body {
-			margin: 0;
-			padding: 0;
-			overflow: hidden;
-		}
+            canvas {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
 
-		canvas {
-			display: block;
-		}
-		
-	</style>
-</head>
-<body>	
-
-	<canvas id="myCanvas"></canvas>
-
-	<script type="module" defer src="./js/main.js"></script>	
-
-</body>
+        <script type="module" defer src="./js/main.js"></script>
+    </body>
 </html>
