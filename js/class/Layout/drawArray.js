@@ -65,7 +65,6 @@ export default class DrawArray {
 	// #=#=#=#=#=# 2.3 Variables #=#=#=#=#=#
 		// #==== Initialized ====#
 
-		// #==== Variables ====#
 		this.tiltAngle = tiltAngle;
 		this.rowSpace = rowSpace;
 		this.colSpace = colSpace;
