@@ -87,11 +87,17 @@ export default class icon {
 	
 
 	// #=#=#=#=#=# 1.4 Set Size #=#=#=#=#=#
+	/**
+	 * Sets the size of the icons multiplied by the factor or as a percentage of the polygon size.
+	 * @returns {number} the size off the icon	
+	 */
 	setSize() {
 		if (this.size != null) {
-			return (this.size * canvas.factor);		
+			// the size multiplied by the screen factor 
+			return +((this.size * canvas.factor).toFixed(1));				
 		}
 		else {
+			// a percentige of the polygone size
 			return (this.polygon.size / 100) * 80;
 		}
 	}
