@@ -4,20 +4,21 @@
 	"fadecolore": "hsl(0, 0.00%, 29.40%)",
 
 	"defautheight": 1080,
+	"minDistancebetwen": 200,
 
 	"rotation": 0,
 	"rowspaching": 40,
-	"columspaching": 40,
+	"columspaching": 20,
 	"clusterchance": 0.019,
 	"noFillChanceColore": 0.25,
-	"noFillChanceGra": 0.66,
+	"noFillChanceGra": 0,
 	"clusterSize": 200,
 	"fadeSize": 300,
-	"fadeoffset": 0,
+	"fadeoffset": 50,
 
-	"iconsize": 30,
+	"iconsize": 25,
 	"polygonsize": 20,
-	"polygonrotaion": 30,
+	"polygonrotaion": 0,
 	"iconrotaion": 0,
 
 

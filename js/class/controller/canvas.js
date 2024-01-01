@@ -30,6 +30,8 @@ export default class canvas {
 	/** @type {number} */
 		static	windowwidth				= window.innerWidth;
 	/** @type {number} */
+		static	windowheight			= window.innerHeight;
+	/** @type {number} */
 		static	factor					= window.innerHeight / settings.defautheight;
 	/** @type {CanvasRenderingContext2D} */
 		static  context;
