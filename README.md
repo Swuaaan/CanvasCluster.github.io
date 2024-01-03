@@ -11,6 +11,6 @@ This project was inspired by [Sebastian Hahner](https://github.com/sebinside/).
 > Test the Projekt [CanvasCluster](https://swuaaan.github.io/CanvasCluster.github.io/).
 
 - [x] Create the base functions.
-- [ ] Optimise the colour of the polygons.
-- [ ] Optimise the icon selection
+- [x] Optimise the colour of the polygons.
+- [x] Optimise the icon selection
 
